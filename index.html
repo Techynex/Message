@@ -1,64 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Message Page</title>
+  <title>Apology Page</title>
   <style>
     body {
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       height: 100vh;
       margin: 0;
-      background-color: black; 
-      color: white; 
-      font-family: Arial, sans-serif;
-      animation: backgroundFade 5s infinite alternate; /* Background color animation 45*/
+      background-color: #000;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      position: relative;
+      animation: backgroundFade 5s infinite alternate;
     }
+
     #message {
       text-align: center;
       font-size: 24px;
-      animation: textGlow 2s ease-in-out infinite alternate; /* Text glow animation */
+      margin-bottom: 20px;
+      animation: textPulse 2s ease-in-out infinite;
     }
+
     img {
-      max-width: 100%;
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 200px;
       height: auto;
-      border-radius: 10px;
-      animation: imageBounce 3s ease-in-out infinite; /* Image bounce animation */
+      transition: transform 0.5s ease-in-out;
     }
 
-    /* Animations */
-    @keyframes textGlow {
-      0% {
-        text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff, 0 0 70px #ff00ff;
-      }
-      100% {
-        text-shadow: 0 0 20px #fff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff, 0 0 70px #ff00ff, 0 0 80px #ff00ff;
-      }
+    #buttonContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
     }
 
-    @keyframes imageBounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(45deg, #ff6b6b, #ff4757);
+      transition: transform 0.3s ease-in-out, background 0.5s;
+    }
+
+    #noButton {
+      position: absolute;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background: linear-gradient(45deg, #ff4757, #ff6b6b);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-10px, -10px); }
+      50% { transform: translate(10px, 10px); }
+      75% { transform: translate(-10px, 10px); }
+    }
+
+    @keyframes textPulse {
+      0% { text-shadow: 0 0 5px #ff4757; }
+      100% { text-shadow: 0 0 20px #ff4757, 0 0 30px #ff4757, 0 0 40px #ff4757; }
     }
 
     @keyframes backgroundFade {
-      0% {
-        background-color: black;
-      }
-      100% {
-        background-color: #1a1a1a;
-      }
+      0% { background-color: #000; }
+      100% { background-color: #333; }
     }
   </style>
 </head>
 <body>
   <div id="message">
-    <p>Thank you for forgiving me. Trust me, I had no intention of getting you upset.</p>
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZndrZXlrN3RuZmtzamZpdWN3bGhrNDFmd2U1OHdja2h3MGR1aXh0eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nG0MqEAopKJy0nFECr/giphy.gif" alt="Image">
+    <h1>Apology</h1>
+    <p>CHODEN, I'm sorry for ignoring you and making you upset. I didn't do it intentionally.</p>
   </div>
+
+  <img id="sadImage" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDdocWU3eXBvazBxMGRhMXhicGFqdXd2bHY4bXNjZ2x0ZTJrOHkwNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9JLOGsEfPjpR1179HE/giphy.gif" alt="Sad Image">
+
+  <div id="buttonContainer">
+    <button id="noButton" onclick="moveNoButton()">No</button>
+    <button id="yesButton" onclick="redirectToNewPage()">Yes</button>
+  </div>
+
+  <script>
+    function moveNoButton() {
+      var button = document.getElementById('noButton');
+      var windowWidth = window.innerWidth - button.clientWidth;
+      var windowHeight = window.innerHeight - button.clientHeight;
+
+      var newLeft = Math.random() * windowWidth;
+      var newTop = Math.random() * windowHeight;
+
+      button.style.left = newLeft + 'px';
+      button.style.top = newTop + 'px';
+
+      var sadImage = document.getElementById('sadImage');
+      sadImage.src = sadImage.src; // Force reload the image to replay the animation
+      sadImage.classList.add('shake'); // Add shake animation class
+      setTimeout(function() {
+        sadImage.classList.remove('shake'); // Remove shake animation class after animation completes
+      }, 500); // Duration of the shake animation
+    }
+
+    function redirectToNewPage() {
+      var yesButton = document.getElementById('yesButton');
+      yesButton.style.transform = 'scale(0)';
+      setTimeout(function() {
+        window.location.href = 'message.html';
+      }, 500); // Delay matches the button's transition duration
+    }
+  </script>
 </body>
 </html>
