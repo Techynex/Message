@@ -9,23 +9,56 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-color: black; /* Change background color to black */
-      color: white; /* Change text color to white */
+      background-color: black; 
+      color: white; 
+      font-family: Arial, sans-serif;
+      animation: backgroundFade 5s infinite alternate; /* Background color animation */
     }
     #message {
       text-align: center;
       font-size: 24px;
+      animation: textGlow 2s ease-in-out infinite alternate; /* Text glow animation */
     }
     img {
       max-width: 100%;
       height: auto;
+      border-radius: 10px;
+      animation: imageBounce 3s ease-in-out infinite; /* Image bounce animation */
+    }
+
+    /* Animations */
+    @keyframes textGlow {
+      0% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff, 0 0 70px #ff00ff;
+      }
+      100% {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff, 0 0 70px #ff00ff, 0 0 80px #ff00ff;
+      }
+    }
+
+    @keyframes imageBounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes backgroundFade {
+      0% {
+        background-color: black;
+      }
+      100% {
+        background-color: #1a1a1a;
+      }
     }
   </style>
 </head>
 <body>
   <div id="message">
-    <p>Thank you for forgiving me.And trust me i had no intention of getting u upset.</p>
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZndrZXlrN3RuZmtzamZpdWN3bGhrNDFmd2U1OHdja2h3MGR1aXh0eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nG0MqEAopKJy0nFECr/giphy.gif" alt="Image"> <!-- Add your image link here -->
+    <p>Thank you for forgiving me. Trust me, I had no intention of getting you upset.</p>
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZndrZXlrN3RuZmtzamZpdWN3bGhrNDFmd2U1OHdja2h3MGR1aXh0eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nG0MqEAopKJy0nFECr/giphy.gif" alt="Image">
   </div>
 </body>
 </html>
